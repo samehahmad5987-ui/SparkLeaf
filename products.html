@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Products — Spark Leaf</title>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .page-hero{padding:140px 0 80px;background:linear-gradient(135deg,#0e2a08 0%,#1a3d10 50%,#2a1a06 100%);position:relative;overflow:hidden;text-align:center}
+    .page-hero .section-label{justify-content:center;color:var(--sage-light)!important}
+    .page-hero .section-label::before{background:var(--sage-light)!important}
+    .page-hero .section-title{color:#fff;text-align:center}
+    .page-hero .section-title em{color:var(--matcha-pale)}
+    .page-hero-sub{font-size:17px;font-weight:300;color:rgba(255,255,255,0.62);line-height:1.8;max-width:580px;margin:0 auto}
+    .page-hero-images{display:flex;justify-content:center;gap:20px;margin-top:48px;position:relative;z-index:2}
+    .hero-can-img{width:160px;height:280px;object-fit:cover;object-position:center 15%;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.5);transition:transform 0.4s}
+    .hero-can-img:hover{transform:translateY(-12px) scale(1.04)}
+    .hero-can-img.middle{transform:translateY(-24px);z-index:2}
+    .hero-can-img.middle:hover{transform:translateY(-36px) scale(1.04)}
+
+    .science-strip{padding:72px 0;background:var(--charcoal);position:relative;z-index:1}
+    .science-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+    .sci-item{text-align:center;padding:24px 16px}
+    .sci-icon{font-size:30px;margin-bottom:12px}
+    .sci-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#fff;margin-bottom:6px}
+    .sci-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,0.52);line-height:1.65}
+
+    .flavors-section{padding:100px 0;background:var(--cream);position:relative;z-index:1}
+    .flavor-deep{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:60px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--border)}
+    .flavor-deep:nth-child(even) .fd-image{order:2}
+    .flavor-deep:nth-child(even) .fd-info{order:1}
+    .fd-image{position:relative;overflow:hidden;min-height:480px}
+    .fd-image img{width:100%;height:100%;object-fit:cover;object-position:center 15%;transition:transform 0.6s}
+    .flavor-deep:hover .fd-image img{transform:scale(1.04)}
+    .fd-flavor-badge{position:absolute;top:20px;left:20px;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:6px 14px;border-radius:20px;z-index:2}
+    .fb-wild{background:rgba(232,245,224,0.9);color:var(--matcha-deep);backdrop-filter:blur(8px)}
+    .fb-citrus{background:rgba(253,235,208,0.9);color:#a05020;backdrop-filter:blur(8px)}
+    .fb-mango{background:rgba(253,245,204,0.9);color:#a07020;backdrop-filter:blur(8px)}
+    .fd-info{padding:52px 48px;display:flex;flex-direction:column;justify-content:center;background:#fff}
+    .fd-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--matcha-light);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    .fd-eyebrow::before{content:'';display:inline-block;width:16px;height:1.5px;background:var(--matcha-light)}
+    .fd-name{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:300;line-height:1.05;color:var(--charcoal);margin-bottom:8px}
+    .fd-name em{font-style:italic;color:var(--matcha)}
+    .fd-tagline{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;font-style:italic;color:var(--text-muted);margin-bottom:20px}
+    .fd-desc{font-size:15px;font-weight:300;color:var(--text-muted);line-height:1.8;margin-bottom:28px}
+    .fd-stats{display:flex;gap:0;background:var(--leaf-bg);border-radius:12px;overflow:hidden;margin-bottom:24px;border:1px solid var(--border)}
+    .fdstat{flex:1;padding:14px 12px;text-align:center;position:relative}
+    .fdstat+.fdstat::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:1px;background:var(--border)}
+    .fdstat-num{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--matcha-deep);display:block;line-height:1;margin-bottom:3px}
+    .fdstat-lbl{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)}
+    .fd-ingredients{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .fding{font-size:12px;color:var(--matcha-deep);background:rgba(74,124,64,0.08);border:1px solid rgba(74,124,64,0.15);border-radius:20px;padding:5px 14px}
+    .fd-benefit-list{display:flex;flex-direction:column;gap:8px}
+    .fd-benefit{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:300;color:var(--text-muted)}
+    .fd-benefit::before{content:'✓';color:var(--matcha);font-weight:700;flex-shrink:0}
+
+    .matcha-science{padding:100px 0;background:linear-gradient(135deg,var(--leaf-bg),var(--parchment) 50%,var(--peach-pale));position:relative;z-index:1}
+    .science-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+    .sci-compound-list{display:flex;flex-direction:column;gap:16px;margin-top:32px}
+    .sci-compound{background:rgba(255,255,255,0.82);border:1px solid var(--border);border-radius:14px;padding:20px 22px;backdrop-filter:blur(8px);transition:var(--transition)}
+    .sci-compound:hover{border-color:var(--matcha);transform:translateX(5px)}
+    .sci-compound-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    .sci-compound-icon{font-size:22px}
+    .sci-compound-name{font-weight:600;font-size:14px;color:var(--charcoal)}
+    .sci-compound-tag{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:10px;background:var(--leaf-bg);color:var(--matcha-deep);margin-left:auto}
+    .sci-compound-desc{font-size:13px;font-weight:300;color:var(--text-muted);line-height:1.65}
+    .sci-visual-right{display:flex;flex-direction:column;gap:20px}
+    .sci-callout{background:var(--matcha-deep);border-radius:20px;padding:32px;color:#fff;text-align:center}
+    .sci-callout-num{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:600;color:var(--matcha-pale);line-height:1;margin-bottom:6px}
+    .sci-callout-label{font-size:13px;font-weight:300;color:rgba(255,255,255,0.7);line-height:1.6}
+    .sci-callout-sub{font-size:11px;color:rgba(255,255,255,0.45);margin-top:6px}
+    .sci-highlights{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .sci-hi{background:rgba(255,255,255,0.82);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;backdrop-filter:blur(6px)}
+    .sci-hi-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--matcha-deep);display:block;margin-bottom:3px}
+    .sci-hi-label{font-size:11px;color:var(--text-muted);line-height:1.4}
+
+    .vs-strip{padding:80px 0;background:var(--charcoal);position:relative;z-index:1}
+    .vs-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;max-width:800px;margin:0 auto}
+    .vs-col{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px}
+    .vs-col.spark{background:rgba(74,124,64,0.15);border-color:rgba(74,124,64,0.4)}
+    .vs-col-title{font-weight:700;font-size:14px;margin-bottom:16px;color:#fff}
+    .vs-col.spark .vs-col-title{color:var(--matcha-pale)}
+    .vs-item{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:8px}
+    .vs-col.spark .vs-item{color:rgba(255,255,255,0.85)}
+    .vs-col:not(.spark) .vs-item{color:rgba(255,255,255,0.45)}
+    .vs-check{color:var(--matcha-pale)}
+    .vs-x{color:rgba(255,59,59,0.7)}
+    .vs-divider{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:rgba(255,255,255,0.2);text-align:center}
+
+    @media(max-width:900px){
+      .flavor-deep,.science-grid{grid-template-columns:1fr}
+      .flavor-deep:nth-child(even) .fd-image,.flavor-deep:nth-child(even) .fd-info{order:0}
+      .fd-image{min-height:280px}
+      .science-inner{grid-template-columns:1fr 1fr}
+      .vs-grid{grid-template-columns:1fr;max-width:400px}
+      .vs-divider{display:none}
+      .sci-highlights{grid-template-columns:1fr 1fr}
+      .page-hero-images{gap:12px}
+      .hero-can-img{width:110px;height:200px}
+    }
+    @media(max-width:560px){
+      .science-inner{grid-template-columns:1fr 1fr}
+      .page-hero-images{gap:8px}
+      .hero-can-img{width:85px;height:160px}
+      .fd-info{padding:32px 24px}
+    }
+  </style>
+</head>
+<body>
+<div class="petal-field" id="petalField" aria-hidden="true"></div>
+<nav class="nav scrolled" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><svg class="logo-leaf" viewBox="0 0 28 32" fill="none"><path d="M14 2C14 2 3 8 3 19C3 25.627 7.925 31 14 31C20.075 31 25 25.627 25 19C25 8 14 2 14 2Z" fill="url(#lg1)"/><path d="M14 31V10" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/><defs><linearGradient id="lg1" x1="14" y1="2" x2="14" y2="31"><stop offset="0%" stop-color="#6daa3a"/><stop offset="100%" stop-color="#3d7a28"/></linearGradient></defs></svg><span class="logo-text">sp<span class="logo-o">◉</span>rk <span class="logo-sub">leaf</span></span></a>
+    <ul class="nav-links" id="navLinks"><li><a href="index.html" class="nav-link">Home</a></li><li><a href="market.html" class="nav-link">Market</a></li><li><a href="products.html" class="nav-link active">Products</a></li><li><a href="partnership.html" class="nav-link">Partnership</a></li><li><a href="about.html" class="nav-link">About</a></li><li><a href="contact.html" class="nav-link">Contact</a></li></ul>
+    <div class="nav-actions"><a href="contact.html" class="btn btn-sm nav-cta">Partner With Us</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label reveal-up" style="justify-content:center">The Product Line</div>
+    <h1 class="section-title reveal-up">Three flavors built<br><em>for shelf performance.</em></h1>
+    <p class="page-hero-sub reveal-up">Each Spark Leaf flavor is engineered for maximum consumer appeal, repeat purchase behavior, and premium retail positioning.</p>
+    <div class="page-hero-images reveal-up">
+      <img src="img-wildberry.png" alt="Matcha Wildberry" class="hero-can-img"/>
+      <img src="img-citrus.png" alt="Matcha Citrus" class="hero-can-img middle"/>
+      <img src="img-mango.png" alt="Mango Passionfruit" class="hero-can-img"/>
+    </div>
+  </div>
+</section>
+
+<!-- SCIENCE STRIP -->
+<div class="science-strip">
+  <div class="container">
+    <div class="science-inner">
+      <div class="sci-item reveal-up" data-delay="0"><div class="sci-icon">🍵</div><div class="sci-title">Premium Matcha</div><div class="sci-desc">Ceremonial-grade matcha — the foundation of smooth, sustained natural energy without synthetic stimulants.</div></div>
+      <div class="sci-item reveal-up" data-delay="80"><div class="sci-icon">🧠</div><div class="sci-title">L-Theanine</div><div class="sci-desc">The amino acid that moderates caffeine's impact — promoting calm focus, eliminating jitters and crashes.</div></div>
+      <div class="sci-item reveal-up" data-delay="160"><div class="sci-icon">🍓</div><div class="sci-title">Real Fruit Flavor</div><div class="sci-desc">No artificial flavors or colors — real fruit-derived flavors that consumers recognize and trust.</div></div>
+      <div class="sci-item reveal-up" data-delay="240"><div class="sci-icon">✅</div><div class="sci-title">Clean Label</div><div class="sci-desc">5g sugar, 55–60 calories, no synthetic stimulants. A label distributors can sell with confidence.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FLAVOR 1: WILDBERRY -->
+<section class="flavors-section">
+  <div class="container">
+    <div class="flavor-deep reveal-up">
+      <div class="fd-image"><img src="img-wildberry.png" alt="Matcha Wildberry"/><div class="fd-flavor-badge fb-wild">01 · Matcha Wildberry</div></div>
+      <div class="fd-info">
+        <div class="fd-eyebrow">Flavor One</div>
+        <h2 class="fd-name"><em>Matcha</em><br>Wildberry</h2>
+        <div class="fd-tagline">"The everyday go-to. Familiar, bright, repeatable."</div>
+        <p class="fd-desc">Ripe strawberries and raspberries meet smooth ceremonial matcha in a can that tastes as good as it performs. Designed for everyday consumption — the flavor that builds a distribution base through consistent repeat purchases.</p>
+        <div class="fd-stats">
+          <div class="fdstat"><span class="fdstat-num">5g</span><span class="fdstat-lbl">Sugar</span></div>
+          <div class="fdstat"><span class="fdstat-num">60</span><span class="fdstat-lbl">Calories</span></div>
+          <div class="fdstat"><span class="fdstat-num">12oz</span><span class="fdstat-lbl">Volume</span></div>
+          <div class="fdstat"><span class="fdstat-num">355mL</span><span class="fdstat-lbl">Metric</span></div>
+        </div>
+        <div class="fd-ingredients">
+          <span class="fding">🍓 Strawberry</span><span class="fding">🫐 Raspberry</span><span class="fding">🍵 Matcha</span><span class="fding">Natural Caffeine</span><span class="fding">L-Theanine</span>
+        </div>
+        <div class="fd-benefit-list">
+          <div class="fd-benefit">No artificial colors or preservatives</div>
+          <div class="fd-benefit">Smooth energy with no crash or jitters</div>
+          <div class="fd-benefit">Best-positioned for broad demographic appeal</div>
+          <div class="fd-benefit">Familiar flavor profile drives trial conversion</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLAVOR 2: CITRUS -->
+    <div class="flavor-deep reveal-up">
+      <div class="fd-image"><img src="img-citrus.png" alt="Matcha Citrus"/><div class="fd-flavor-badge fb-citrus">02 · Matcha Citrus</div></div>
+      <div class="fd-info">
+        <div class="fd-eyebrow">Flavor Two</div>
+        <h2 class="fd-name"><em>Matcha</em><br>Citrus</h2>
+        <div class="fd-tagline">"The refresher. Zesty, clean, and unmistakably premium."</div>
+        <p class="fd-desc">Bright grapefruit and lime cut through the earthy depth of ceremonial matcha for a crisp, citrus-forward burst that feels both premium and accessible. Ideal for retailers targeting wellness-minded and active consumers.</p>
+        <div class="fd-stats">
+          <div class="fdstat"><span class="fdstat-num">5g</span><span class="fdstat-lbl">Sugar</span></div>
+          <div class="fdstat"><span class="fdstat-num">55</span><span class="fdstat-lbl">Calories</span></div>
+          <div class="fdstat"><span class="fdstat-num">12oz</span><span class="fdstat-lbl">Volume</span></div>
+          <div class="fdstat"><span class="fdstat-num">355mL</span><span class="fdstat-lbl">Metric</span></div>
+        </div>
+        <div class="fd-ingredients">
+          <span class="fding">🍊 Grapefruit</span><span class="fding">🍋 Lime</span><span class="fding">🍵 Matcha</span><span class="fding">Natural Caffeine</span><span class="fding">L-Theanine</span>
+        </div>
+        <div class="fd-benefit-list">
+          <div class="fd-benefit">Lowest calorie option (55 cal) — premium wellness positioning</div>
+          <div class="fd-benefit">Citrus profile drives shelf visibility and curiosity</div>
+          <div class="fd-benefit">Strong appeal to fitness and active lifestyle consumers</div>
+          <div class="fd-benefit">Crisp taste profile works year-round</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLAVOR 3: MANGO -->
+    <div class="flavor-deep reveal-up">
+      <div class="fd-image"><img src="img-mango.png" alt="Matcha Mango Passionfruit"/><div class="fd-flavor-badge fb-mango">03 · Mango Passionfruit</div></div>
+      <div class="fd-info">
+        <div class="fd-eyebrow">Flavor Three</div>
+        <h2 class="fd-name"><em>Matcha</em><br>Mango Passion</h2>
+        <div class="fd-tagline">"The standout. Exotic, bold, premium shelf presence."</div>
+        <p class="fd-desc">Tropical mango and exotic passionfruit elevated by the depth of premium matcha. This is the shelf attention-grabber — the flavor that stops consumers mid-aisle and creates the social media moments that drive brand virality.</p>
+        <div class="fd-stats">
+          <div class="fdstat"><span class="fdstat-num">5g</span><span class="fdstat-lbl">Sugar</span></div>
+          <div class="fdstat"><span class="fdstat-num">60</span><span class="fdstat-lbl">Calories</span></div>
+          <div class="fdstat"><span class="fdstat-num">12oz</span><span class="fdstat-lbl">Volume</span></div>
+          <div class="fdstat"><span class="fdstat-num">355mL</span><span class="fdstat-lbl">Metric</span></div>
+        </div>
+        <div class="fd-ingredients">
+          <span class="fding">🥭 Mango</span><span class="fding">🌸 Passionfruit</span><span class="fding">🍵 Matcha</span><span class="fding">Natural Caffeine</span><span class="fding">L-Theanine</span>
+        </div>
+        <div class="fd-benefit-list">
+          <div class="fd-benefit">Trending tropical flavor profile — social-media-ready</div>
+          <div class="fd-benefit">Highest visual impact for shelf and display</div>
+          <div class="fd-benefit">Premium limited-run positioning drives urgency</div>
+          <div class="fd-benefit">Strong Gen Z and wellness enthusiast appeal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATCHA SCIENCE -->
+<section class="matcha-science">
+  <div class="container">
+    <div class="science-grid">
+      <div>
+        <div class="section-label reveal-up">The Science</div>
+        <h2 class="section-title reveal-up">Why matcha is the<br><em>superior energy source.</em></h2>
+        <p class="section-sub reveal-up" style="margin-bottom:32px">For centuries, Japanese monks used matcha for sustained focus during long meditation. The science behind why it works is directly translatable to modern consumer energy needs.</p>
+        <div class="sci-compound-list">
+          <div class="sci-compound reveal-up" data-delay="0"><div class="sci-compound-header"><div class="sci-compound-icon">⚡</div><div class="sci-compound-name">Natural Caffeine</div><div class="sci-compound-tag">Energy</div></div><div class="sci-compound-desc">Provides natural, sustained energy. Its absorption is moderated by L-theanine — resulting in a smooth curve instead of a sharp spike and crash.</div></div>
+          <div class="sci-compound reveal-up" data-delay="80"><div class="sci-compound-header"><div class="sci-compound-icon">🧘</div><div class="sci-compound-name">L-Theanine</div><div class="sci-compound-tag">Focus</div></div><div class="sci-compound-desc">Promotes alpha brain wave activity — the same state of calm alertness achieved during meditation. Completely eliminates jitters and anxiety associated with caffeine.</div></div>
+          <div class="sci-compound reveal-up" data-delay="160"><div class="sci-compound-header"><div class="sci-compound-icon">🛡️</div><div class="sci-compound-name">EGCG Antioxidants</div><div class="sci-compound-tag">Wellness</div></div><div class="sci-compound-desc">Catechins, particularly EGCG, offer powerful cell protection. Matcha has 137x more EGCG than regular brewed green tea — a genuinely meaningful wellness differentiator.</div></div>
+          <div class="sci-compound reveal-up" data-delay="240"><div class="sci-compound-header"><div class="sci-compound-icon">🌱</div><div class="sci-compound-name">Vitamins & Minerals</div><div class="sci-compound-tag">Nutrition</div></div><div class="sci-compound-desc">Vitamin C, K, B vitamins, potassium, iron, magnesium, selenium, zinc, and chromium. Real nutritional density that mainstream energy drinks simply don't offer.</div></div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="sci-visual-right">
+          <div class="sci-callout">
+            <div class="sci-callout-num">137x</div>
+            <div class="sci-callout-label">more EGCG antioxidants in matcha compared to regular brewed green tea</div>
+            <div class="sci-callout-sub">Source: Journal of Chromatography A</div>
+          </div>
+          <div class="sci-highlights">
+            <div class="sci-hi"><span class="sci-hi-num">0g</span><span class="sci-hi-label">Artificial sweeteners or flavors</span></div>
+            <div class="sci-hi"><span class="sci-hi-num">5g</span><span class="sci-hi-label">Natural fruit sugar per can</span></div>
+            <div class="sci-hi"><span class="sci-hi-num">6h</span><span class="sci-hi-label">Estimated sustained focus window</span></div>
+            <div class="sci-hi"><span class="sci-hi-num">0</span><span class="sci-hi-label">Synthetic stimulants used</span></div>
+          </div>
+          <div style="background:rgba(255,255,255,0.82);border:1px solid var(--border);border-radius:14px;padding:22px;backdrop-filter:blur(8px)">
+            <div style="font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px">Why this matters for distributors</div>
+            <p style="font-size:14px;font-weight:300;color:var(--text-muted);line-height:1.75">Products with real functional benefits drive <strong style="color:var(--charcoal)">higher repeat purchase rates</strong>. When consumers experience genuine sustained energy without a crash, they come back. That consistency is what builds distribution volume.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VS COMPARISON -->
+<section class="vs-strip">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:44px">
+      <div class="section-label reveal-up" style="justify-content:center;color:var(--sage-light)!important">
+        <span style="width:22px;height:1.5px;background:var(--sage-light);display:inline-block"></span>
+        Product Comparison
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,46px);font-weight:300;color:#fff;margin-bottom:0" class="reveal-up">Spark Leaf vs. <em style="color:var(--matcha-pale)">conventional energy drinks.</em></h2>
+    </div>
+    <div class="vs-grid reveal-up">
+      <div class="vs-col spark">
+        <div class="vs-col-title">✦ Spark Leaf</div>
+        <div class="vs-item"><span class="vs-check">✓</span> Natural matcha caffeine</div>
+        <div class="vs-item"><span class="vs-check">✓</span> L-Theanine (no crash)</div>
+        <div class="vs-item"><span class="vs-check">✓</span> Only 5g natural sugar</div>
+        <div class="vs-item"><span class="vs-check">✓</span> Real fruit flavors</div>
+        <div class="vs-item"><span class="vs-check">✓</span> EGCG antioxidants</div>
+        <div class="vs-item"><span class="vs-check">✓</span> No artificial colors</div>
+        <div class="vs-item"><span class="vs-check">✓</span> 55–60 calories</div>
+        <div class="vs-item"><span class="vs-check">✓</span> Premium clean label</div>
+      </div>
+      <div class="vs-divider">vs</div>
+      <div class="vs-col">
+        <div class="vs-col-title">Conventional Energy Brands</div>
+        <div class="vs-item"><span class="vs-x">✗</span> Synthetic caffeine blends</div>
+        <div class="vs-item"><span class="vs-x">✗</span> Caffeine crash common</div>
+        <div class="vs-item"><span class="vs-x">✗</span> 27–54g sugar per can</div>
+        <div class="vs-item"><span class="vs-x">✗</span> Artificial flavor systems</div>
+        <div class="vs-item"><span class="vs-x">✗</span> No functional antioxidants</div>
+        <div class="vs-item"><span class="vs-x">✗</span> Artificial dyes often used</div>
+        <div class="vs-item"><span class="vs-x">✗</span> 110–220+ calories</div>
+        <div class="vs-item"><span class="vs-x">✗</span> Mass-market commodity label</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:80px 0;background:var(--cream);text-align:center;position:relative;z-index:1">
+  <div class="container">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4.5vw,52px);font-weight:300;color:var(--charcoal);margin-bottom:16px" class="reveal-up">A product your customers<br><em style="color:var(--matcha)">will come back for.</em></h2>
+    <p style="font-size:15px;font-weight:300;color:var(--text-muted);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.8" class="reveal-up">The clean formula drives repeat purchases. The premium positioning supports strong margins. Let's discuss how Spark Leaf fits your distribution portfolio.</p>
+    <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap" class="reveal-up">
+      <a href="partnership.html" class="btn btn-primary btn-lg">Partnership Options →</a>
+      <a href="contact.html" class="btn btn-outline btn-lg">Contact Our Team</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="logo"><svg class="logo-leaf" viewBox="0 0 28 32" fill="none"><path d="M14 2C14 2 3 8 3 19C3 25.627 7.925 31 14 31C20.075 31 25 25.627 25 19C25 8 14 2 14 2Z" fill="url(#lgf)"/><path d="M14 31V10" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/><defs><linearGradient id="lgf" x1="14" y1="2" x2="14" y2="31"><stop offset="0%" stop-color="#6daa3a"/><stop offset="100%" stop-color="#3d7a28"/></linearGradient></defs></svg><span class="logo-text">sp<span class="logo-o">◉</span>rk <span class="logo-sub">leaf</span></span></a><p class="footer-tagline">America's first premium matcha energy drink.</p><div class="footer-contact-block"><a href="tel:5512161346" class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>551-216-1346</a><a href="mailto:sparkleafco@gmail.com" class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>sparkleafco@gmail.com</a></div></div><div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="market.html">Market</a></li><li><a href="products.html">Products</a></li><li><a href="partnership.html">Partnership</a></li></ul></div><div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="about.html">Founders</a></li><li><a href="about.html">The Science</a></li></ul></div><div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="contact.html">Partner Inquiry</a></li><li><a href="contact.html">Investor Inquiry</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 Spark Leaf Co., Inc. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div></div></div></footer>
+
+<!-- AI CHAT -->
+<div class="chat-launcher" id="chatLauncher"><div class="chat-bubble-hint" id="chatHint">Product questions? Ask AI →</div><button class="chat-toggle-btn" aria-label="Open chat"><div class="chat-pulse"></div><svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+<div class="chat-window" id="chatWindow"><div class="chat-header"><div class="chat-avatar">🍵</div><div class="chat-header-info"><div class="chat-header-name">Spark Leaf Assistant</div><div class="chat-header-status"><div class="status-dot"></div>Online · Ready to help</div></div></div><div class="chat-messages" id="chatMessages"></div><div class="chat-quick-btns"><button class="chat-quick-btn" data-msg="Tell me about the Matcha Wildberry flavor">🍓 Wildberry</button><button class="chat-quick-btn" data-msg="What are the health benefits of matcha?">🍵 Benefits</button><button class="chat-quick-btn" data-msg="How does Spark Leaf compare to Red Bull?">⚡ vs. Others</button><button class="chat-quick-btn" data-msg="How do I get in touch about distribution?">📞 Contact</button></div><div class="chat-input-row"><input type="text" class="chat-input" id="chatInput" placeholder="Ask about our products…"/><button class="chat-send-btn" id="chatSend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><div class="chat-powered">Powered by Spark Leaf AI · sparkleafco@gmail.com</div></div>
+<script src="shared.js"></script>
+</body>
+</html>

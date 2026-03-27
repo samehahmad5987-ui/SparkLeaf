@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>About Us — Spark Leaf</title>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .page-hero{padding:140px 0 80px;background:linear-gradient(135deg,#0a2006 0%,#162e0a 50%,#241606 100%);position:relative;overflow:hidden}
+    .page-hero-bg{position:absolute;inset:0;z-index:0}
+    .page-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.2;object-position:center 30%}
+    .page-hero-inner{position:relative;z-index:2;padding:0 28px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .ph-label{color:var(--sage-light)!important}
+    .ph-label::before{background:var(--sage-light)!important}
+    .ph-title{color:#fff!important}
+    .ph-title em{color:var(--matcha-pale)!important}
+    .ph-sub{font-size:17px;font-weight:300;color:rgba(255,255,255,0.62);line-height:1.8;margin-bottom:28px}
+    .hero-product-img{border-radius:20px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,0.5)}
+    .hero-product-img img{width:100%;height:420px;object-fit:cover;object-position:center 20%}
+
+    /* ── STORY ── */
+    .story-section{padding:110px 0;background:var(--cream);position:relative;z-index:1}
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .story-visual{position:relative}
+    .story-img-main{border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/5}
+    .story-img-main img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+    .story-img-badge{
+      position:absolute;bottom:-20px;right:-20px;
+      background:#fff;border:1px solid var(--border);border-radius:16px;
+      padding:18px 22px;box-shadow:var(--shadow-md);min-width:160px;
+    }
+    .story-badge-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:var(--matcha-deep);line-height:1;margin-bottom:4px}
+    .story-badge-label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted)}
+    .story-text{max-width:520px}
+    .story-lead{
+      font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;
+      font-style:italic;color:var(--charcoal);line-height:1.65;
+      border-left:3px solid var(--matcha);padding-left:20px;margin-bottom:24px;
+    }
+    .story-lead strong{color:var(--matcha-deep);font-style:normal;font-weight:600}
+    .story-body{font-size:15px;font-weight:300;color:var(--text-muted);line-height:1.85;margin-bottom:16px}
+    .story-values{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+    .sval{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--matcha-deep);background:var(--leaf-bg);border:1px solid rgba(74,124,64,0.15);border-radius:30px;padding:7px 16px}
+
+    /* ── FOUNDERS ── */
+    .founders-section{padding:100px 0;background:linear-gradient(135deg,var(--charcoal) 0%,#1a2e10 100%);position:relative;z-index:1;overflow:hidden}
+    .f-bg{position:absolute;inset:0;z-index:0}
+    .f-bg img{width:100%;height:100%;object-fit:cover;opacity:0.08}
+    .f-inner{position:relative;z-index:2}
+    .f-label{color:var(--sage-light)!important}
+    .f-label::before{background:var(--sage-light)!important}
+    .f-title{color:#fff!important}
+    .f-title em{color:var(--matcha-pale)!important}
+    .founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:56px}
+    .founder-card{
+      background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,0.1);border-radius:24px;
+      overflow:hidden;transition:var(--transition);
+    }
+    .founder-card:hover{background:rgba(255,255,255,0.11);transform:translateY(-4px)}
+    .founder-card-top{
+      background:linear-gradient(135deg,rgba(74,124,64,0.3),rgba(74,124,64,0.1));
+      padding:40px 36px 32px;
+    }
+    .founder-role{font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--sage-light);margin-bottom:10px}
+    .founder-name{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#fff;margin-bottom:4px}
+    .founder-title{font-size:13px;font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:20px}
+    .founder-contact{display:flex;flex-direction:column;gap:8px}
+    .f-contact-item{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,0.65);transition:color 0.2s}
+    .f-contact-item:hover{color:var(--matcha-pale)}
+    .f-contact-item svg{width:14px;height:14px;color:var(--sage-light);flex-shrink:0}
+    .founder-card-body{padding:28px 36px 36px}
+    .founder-bio{font-size:14px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:20px}
+    .founder-tags{display:flex;flex-wrap:wrap;gap:8px}
+    .ftag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:4px 12px}
+
+    /* ── MISSION ── */
+    .mission-section{padding:100px 0;background:var(--warm-white);position:relative;z-index:1}
+    .mission-big{
+      font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4.5vw,58px);
+      font-weight:300;line-height:1.15;color:var(--charcoal);
+      max-width:900px;margin:0 auto;text-align:center;margin-bottom:60px;
+    }
+    .mission-big em{font-style:italic;color:var(--matcha)}
+    .mission-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .mpillar{padding:32px 28px;background:#fff;border:1px solid var(--border);border-radius:20px;text-align:center;transition:var(--transition)}
+    .mpillar:hover{transform:translateY(-5px);border-color:var(--matcha);box-shadow:var(--shadow-md)}
+    .mpillar-icon{font-size:36px;margin-bottom:16px}
+    .mpillar-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:10px}
+    .mpillar-desc{font-size:14px;font-weight:300;color:var(--text-muted);line-height:1.75}
+
+    /* ── TIMELINE ── */
+    .timeline-section{padding:100px 0;background:var(--cream);position:relative;z-index:1}
+    .timeline{position:relative;max-width:720px;margin:52px auto 0}
+    .timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--matcha),var(--matcha-pale))}
+    .timeline-item{display:flex;gap:28px;margin-bottom:44px;position:relative}
+    .timeline-dot{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--matcha),var(--matcha-deep));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 16px rgba(74,124,64,0.3);z-index:1}
+    .timeline-content{padding-top:12px}
+    .timeline-year{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--matcha-light);margin-bottom:6px}
+    .timeline-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal);margin-bottom:8px}
+    .timeline-desc{font-size:14px;font-weight:300;color:var(--text-muted);line-height:1.7}
+
+    /* ── GALLERY ── */
+    .gallery-section{padding:80px 0 0;background:var(--warm-white);position:relative;z-index:1}
+    .gallery-mosaic{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      grid-template-rows:240px 240px;
+      gap:4px;margin-top:48px;
+    }
+    .gm-item{overflow:hidden;position:relative;cursor:pointer}
+    .gm-item.tall{grid-row:span 2}
+    .gm-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+    .gm-item:hover img{transform:scale(1.05)}
+    .gm-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,45,10,0.65) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;display:flex;align-items:flex-end;padding:20px}
+    .gm-item:hover .gm-overlay{opacity:1}
+    .gm-label{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:#fff}
+
+    @media(max-width:900px){
+      .page-hero-inner,.story-grid,.founders-grid,.mission-pillars{grid-template-columns:1fr}
+      .page-hero-inner{gap:40px}
+      .story-img-badge{bottom:-10px;right:-10px}
+      .gallery-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+      .gm-item.tall{grid-row:span 1}
+    }
+    @media(max-width:560px){
+      .mission-pillars{grid-template-columns:1fr}
+      .gallery-mosaic{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<div class="petal-field" id="petalField" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav class="nav scrolled" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><svg class="logo-leaf" viewBox="0 0 28 32" fill="none"><path d="M14 2C14 2 3 8 3 19C3 25.627 7.925 31 14 31C20.075 31 25 25.627 25 19C25 8 14 2 14 2Z" fill="url(#lg1)"/><path d="M14 31V10" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/><defs><linearGradient id="lg1" x1="14" y1="2" x2="14" y2="31"><stop offset="0%" stop-color="#6daa3a"/><stop offset="100%" stop-color="#3d7a28"/></linearGradient></defs></svg><span class="logo-text">sp<span class="logo-o">◉</span>rk <span class="logo-sub">leaf</span></span></a>
+    <ul class="nav-links" id="navLinks"><li><a href="index.html" class="nav-link">Home</a></li><li><a href="market.html" class="nav-link">Market</a></li><li><a href="products.html" class="nav-link">Products</a></li><li><a href="partnership.html" class="nav-link">Partnership</a></li><li><a href="about.html" class="nav-link active">About</a></li><li><a href="contact.html" class="nav-link">Contact</a></li></ul>
+    <div class="nav-actions"><a href="contact.html" class="btn btn-sm nav-cta">Partner With Us</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"><img src="img-collage.png" alt="Spark Leaf products"/></div>
+  <div class="page-hero-inner container">
+    <div>
+      <div class="section-label ph-label reveal-up">Our Story</div>
+      <h1 class="section-title ph-title reveal-up">Built from<br><em>frustration.<br>Grown by purpose.</em></h1>
+      <p class="ph-sub reveal-up">We were tired of energy drinks that made us feel worse. So we built something better — cleaner, more effective, and actually good for you. That's Spark Leaf.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap" class="reveal-up">
+        <a href="#founders" class="btn btn-white btn-lg">Meet the Founders</a>
+        <a href="contact.html" class="btn btn-outline-white btn-lg">Partner With Us</a>
+      </div>
+    </div>
+    <div class="hero-product-img reveal-right">
+      <img src="img-hero.png" alt="Spark Leaf at sunset"/>
+    </div>
+  </div>
+</section>
+
+<!-- STORY SECTION -->
+<section class="story-section">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-visual reveal-left">
+        <div class="story-img-main">
+          <img src="img-cans-tall.jpg" alt="Spark Leaf three flavors"/>
+        </div>
+        <div class="story-img-badge">
+          <div class="story-badge-num">2025</div>
+          <div class="story-badge-label">Founded · New Jersey</div>
+        </div>
+      </div>
+      <div class="story-text reveal-right">
+        <div class="section-label">The Origin</div>
+        <h2 class="section-title">A simple idea<br><em>that changed everything.</em></h2>
+        <div class="story-lead">
+          Spark Leaf was born from a simple idea: <strong>energy should feel good — before, during, and after you drink it.</strong>
+        </div>
+        <p class="story-body">We were tired of energy drinks loaded with sugar, artificial ingredients, and the crash that always followed. So we turned to something timeless and powerful: matcha. Known for its smooth, sustained energy and natural focus, matcha became the heart of Spark Leaf.</p>
+        <p class="story-body">We blended premium matcha with thoughtfully selected natural ingredients to create refreshing flavors — each crafted to energize without overwhelm. Spark Leaf is about fueling your day with clarity, balance, and intention, whether you're powering through work, working out, or simply living fully.</p>
+        <p class="story-body">We didn't just want to make another energy drink. We wanted to make the right one — the one that consumers actually feel good about buying, and that distributors can confidently stand behind.</p>
+        <div class="story-values">
+          <div class="sval">🌿 100% Natural</div>
+          <div class="sval">🍵 Premium Matcha</div>
+          <div class="sval">🌸 Real Fruit</div>
+          <div class="sval">✨ No Artificial Colors</div>
+          <div class="sval">⚡ No Crash</div>
+          <div class="sval">🇺🇸 Made for the U.S.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDERS -->
+<section class="founders-section" id="founders">
+  <div class="f-bg"><img src="img-cans-float.jpg" alt=""/></div>
+  <div class="container f-inner">
+    <div class="section-label f-label reveal-up">The People Behind Spark Leaf</div>
+    <h2 class="section-title f-title reveal-up">Meet the founders<br><em>driving the vision.</em></h2>
+    <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.55);max-width:540px;line-height:1.8;margin-bottom:0" class="reveal-up">Spark Leaf is founder-led, which means the people you'll be speaking with are the same people who built the product, did the research, and are committed to its long-term success.</p>
+    <div class="founders-grid">
+      <div class="founder-card reveal-up" data-delay="0">
+        <div class="founder-card-top">
+          <div class="founder-role">Co-Founder</div>
+          <div class="founder-name">Prince Ahmed</div>
+          <div class="founder-title">Chief Executive & Brand Strategy</div>
+          <div class="founder-contact">
+            <a href="tel:5513128391" class="f-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>(551) 312-8391</a>
+            <a href="mailto:sparkleafco@gmail.com" class="f-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>sparkleafco@gmail.com</a>
+          </div>
+        </div>
+        <div class="founder-card-body">
+          <p class="founder-bio">Prince leads Spark Leaf's brand direction, strategic positioning, and investor relations. With a vision for what the U.S. functional beverage market is missing, he identified the matcha energy opportunity and built Spark Leaf's concept from the ground up. Directly involved in every distributor and investment conversation.</p>
+          <div class="founder-tags"><span class="ftag">Brand Strategy</span><span class="ftag">Market Vision</span><span class="ftag">Investor Relations</span></div>
+        </div>
+      </div>
+      <div class="founder-card reveal-up" data-delay="120">
+        <div class="founder-card-top">
+          <div class="founder-role">Co-Founder</div>
+          <div class="founder-name">Sameh Ahmad</div>
+          <div class="founder-title">Chief Operations & Distribution Strategy</div>
+          <div class="founder-contact">
+            <a href="tel:5512161346" class="f-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>(551) 216-1346</a>
+            <a href="mailto:sparkleafco@gmail.com" class="f-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>sparkleafco@gmail.com</a>
+          </div>
+        </div>
+        <div class="founder-card-body">
+          <p class="founder-bio">Sameh drives Spark Leaf's operational execution — from product sourcing and supply chain to distribution partnership development. He brings the operational rigor needed to translate a powerful brand concept into a scalable, reliable distribution business. The direct point of contact for distribution inquiries.</p>
+          <div class="founder-tags"><span class="ftag">Operations</span><span class="ftag">Distribution</span><span class="ftag">Supply Chain</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission-section">
+  <div class="container">
+    <div class="section-label reveal-up" style="justify-content:center">Our Mission</div>
+    <div class="mission-big reveal-up">"We exist to prove that energy can be <em>clean, functional, and genuinely good</em> — without sacrificing taste, performance, or the planet."</div>
+    <div class="mission-pillars">
+      <div class="mpillar reveal-up" data-delay="0">
+        <div class="mpillar-icon">🌿</div>
+        <div class="mpillar-title">Natural First</div>
+        <div class="mpillar-desc">Every ingredient is chosen for a reason. Matcha, real fruit, no artificial colors or preservatives. If it doesn't belong, it doesn't go in the can.</div>
+      </div>
+      <div class="mpillar reveal-up" data-delay="80">
+        <div class="mpillar-icon">⚡</div>
+        <div class="mpillar-title">Functional Always</div>
+        <div class="mpillar-desc">Energy that lasts. Focus that's real. The L-theanine and matcha combination isn't a trend — it's science-backed performance that consumers can feel.</div>
+      </div>
+      <div class="mpillar reveal-up" data-delay="160">
+        <div class="mpillar-icon">🤝</div>
+        <div class="mpillar-title">Partnership-Driven</div>
+        <div class="mpillar-desc">We grow when our partners grow. Every distributor and investor relationship is built on transparency, honest data, and shared long-term ambition.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="science">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:0">
+      <div class="section-label reveal-up" style="justify-content:center">The Journey</div>
+      <h2 class="section-title reveal-up" style="text-align:center">From idea to<br><em>market-ready brand.</em></h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal-up" data-delay="0">
+        <div class="timeline-dot">💡</div>
+        <div class="timeline-content">
+          <div class="timeline-year">The Idea</div>
+          <div class="timeline-title">Identifying the Gap</div>
+          <div class="timeline-desc">Founders Prince Ahmed and Sameh Ahmad recognized that the U.S. energy drink market lacked a premium, matcha-based alternative — a gap already being filled profitably in Europe and Asia. The research began.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal-up" data-delay="80">
+        <div class="timeline-dot">🔬</div>
+        <div class="timeline-content">
+          <div class="timeline-year">R&D Phase</div>
+          <div class="timeline-title">Research & Formula Development</div>
+          <div class="timeline-desc">Extensive market research backed by sources including Grand View Research and Mordor Intelligence. Formula development focused on premium matcha sourcing, optimal L-theanine ratios, and real fruit flavor integration — all with minimal additives and sugar.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal-up" data-delay="160">
+        <div class="timeline-dot">🎨</div>
+        <div class="timeline-content">
+          <div class="timeline-year">Brand & Product</div>
+          <div class="timeline-title">Three Flavors. One Identity.</div>
+          <div class="timeline-desc">Matcha Wildberry, Matcha Citrus, and Matcha Mango Passionfruit — three distinct profiles designed to cover broad consumer taste preferences while maintaining Spark Leaf's premium, natural positioning. Packaging built for shelf impact and social media visibility.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal-up" data-delay="240">
+        <div class="timeline-dot">🚀</div>
+        <div class="timeline-content">
+          <div class="timeline-year">Now · 2025</div>
+          <div class="timeline-title">Market-Ready. Seeking Partners.</div>
+          <div class="timeline-desc">Spark Leaf is ready to enter the U.S. market with a distribution strategy built on early-partner advantage. We're actively seeking distribution and investment partners who understand the category and want to grow with it.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal-up" data-delay="320">
+        <div class="timeline-dot">📈</div>
+        <div class="timeline-content">
+          <div class="timeline-year">The Vision · 2026–2030</div>
+          <div class="timeline-title">Scale Across the U.S.</div>
+          <div class="timeline-desc">Strategic expansion into retail, foodservice, gyms, and specialty channels. As matcha-based beverages continue rising in consumer preference, Spark Leaf is positioned to be the brand that defines the category in the American market — just as Perfect Ted did in the UK.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="container" style="margin-bottom:48px">
+    <div class="section-label reveal-up">Visual Story</div>
+    <h2 class="section-title reveal-up">The brand<br><em>in every detail.</em></h2>
+  </div>
+  <div class="gallery-mosaic">
+    <div class="gm-item tall"><img src="img-hero.png" alt="Spark Leaf launch"/><div class="gm-overlay"><div class="gm-label">The Launch</div></div></div>
+    <div class="gm-item"><img src="img-wildberry.png" alt="Wildberry"/><div class="gm-overlay"><div class="gm-label">Matcha Wildberry</div></div></div>
+    <div class="gm-item"><img src="img-citrus.png" alt="Citrus"/><div class="gm-overlay"><div class="gm-label">Matcha Citrus</div></div></div>
+    <div class="gm-item"><img src="img-mango.png" alt="Mango Passion"/><div class="gm-overlay"><div class="gm-label">Mango Passionfruit</div></div></div>
+    <div class="gm-item"><img src="img-can-bottom.jpg" alt="Crafted detail"/><div class="gm-overlay"><div class="gm-label">Crafted Detail</div></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:100px 0;background:var(--charcoal);text-align:center;position:relative;z-index:1">
+  <div class="container">
+    <div class="section-label reveal-up" style="justify-content:center;color:var(--sage-light)!important"><span style="width:22px;height:1.5px;background:var(--sage-light);display:inline-block"></span>Ready?</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,58px);font-weight:300;color:#fff;margin-bottom:18px;line-height:1.1" class="reveal-up">Let's build something<br><em style="color:var(--matcha-pale)">that lasts.</em></h2>
+    <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.54);max-width:500px;margin:0 auto 36px;line-height:1.8" class="reveal-up">Whether you want to distribute, invest, or simply learn more — the right conversation starts here.</p>
+    <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap" class="reveal-up">
+      <a href="contact.html" class="btn btn-primary btn-lg">Contact Our Team →</a>
+      <a href="partnership.html" class="btn btn-outline-white btn-lg">View Partnership Details</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="logo"><svg class="logo-leaf" viewBox="0 0 28 32" fill="none"><path d="M14 2C14 2 3 8 3 19C3 25.627 7.925 31 14 31C20.075 31 25 25.627 25 19C25 8 14 2 14 2Z" fill="url(#lgf)"/><path d="M14 31V10" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/><defs><linearGradient id="lgf" x1="14" y1="2" x2="14" y2="31"><stop offset="0%" stop-color="#6daa3a"/><stop offset="100%" stop-color="#3d7a28"/></linearGradient></defs></svg><span class="logo-text">sp<span class="logo-o">◉</span>rk <span class="logo-sub">leaf</span></span></a><p class="footer-tagline">America's first premium matcha energy drink.</p><div class="footer-contact-block"><a href="tel:5512161346" class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>551-216-1346</a><a href="mailto:sparkleafco@gmail.com" class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>sparkleafco@gmail.com</a></div></div><div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="market.html">Market</a></li><li><a href="products.html">Products</a></li><li><a href="partnership.html">Partnership</a></li></ul></div><div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="about.html">Founders</a></li><li><a href="about.html">The Science</a></li></ul></div><div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="contact.html">Partner Inquiry</a></li><li><a href="contact.html">Investor Inquiry</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 Spark Leaf Co., Inc. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div></div></div></footer>
+
+<!-- AI CHAT -->
+<div class="chat-launcher" id="chatLauncher"><div class="chat-bubble-hint" id="chatHint">Questions about the team? →</div><button class="chat-toggle-btn" aria-label="Open chat"><div class="chat-pulse"></div><svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+<div class="chat-window" id="chatWindow"><div class="chat-header"><div class="chat-avatar">🍵</div><div class="chat-header-info"><div class="chat-header-name">Spark Leaf Assistant</div><div class="chat-header-status"><div class="status-dot"></div>Online · Ready to help</div></div></div><div class="chat-messages" id="chatMessages"></div><div class="chat-quick-btns"><button class="chat-quick-btn" data-msg="Tell me about the founders">👤 Founders</button><button class="chat-quick-btn" data-msg="What is Spark Leaf's mission?">🌿 Mission</button><button class="chat-quick-btn" data-msg="How do I become a distribution partner?">🤝 Distribute</button><button class="chat-quick-btn" data-msg="What is the phone number and email?">📞 Contact</button></div><div class="chat-input-row"><input type="text" class="chat-input" id="chatInput" placeholder="Ask about Spark Leaf…"/><button class="chat-send-btn" id="chatSend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><div class="chat-powered">Powered by Spark Leaf AI · sparkleafco@gmail.com</div></div>
+
+<script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Contact — Spark Leaf</title>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .page-hero{
+      padding:140px 0 80px;
+      background:linear-gradient(135deg,#0c2008 0%,#1e3d10 55%,#281406 100%);
+      position:relative;overflow:hidden;
+    }
+    .page-hero-inner{position:relative;z-index:2;padding:0 28px;max-width:1200px;margin:0 auto;text-align:center}
+    .ph-label{color:var(--sage-light)!important}
+    .ph-label::before{background:var(--sage-light)!important}
+    .ph-title{color:#fff!important}
+    .ph-title em{color:var(--matcha-pale)!important}
+    .ph-sub{font-size:17px;font-weight:300;color:rgba(255,255,255,0.62);line-height:1.8;max-width:580px;margin:0 auto 44px}
+    .contact-quick{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+    .cq-pill{
+      display:flex;align-items:center;gap:10px;
+      background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,0.2);border-radius:40px;
+      padding:12px 22px;color:#fff;font-size:14px;
+      transition:var(--transition);
+    }
+    .cq-pill:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px)}
+    .cq-pill svg{width:16px;height:16px;color:var(--matcha-pale);flex-shrink:0}
+
+    /* ── MAIN CONTACT BODY ── */
+    .contact-body{
+      padding:100px 0;background:var(--cream);position:relative;z-index:1;
+    }
+    .contact-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:start}
+
+    /* left side info */
+    .contact-info{position:sticky;top:100px}
+    .ci-card{
+      background:#fff;border:1px solid var(--border);border-radius:20px;
+      padding:32px;margin-bottom:20px;box-shadow:var(--shadow-sm);
+    }
+    .ci-card-icon{font-size:26px;margin-bottom:12px}
+    .ci-card-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal);margin-bottom:6px}
+    .ci-card-desc{font-size:13px;font-weight:300;color:var(--text-muted);line-height:1.7;margin-bottom:18px}
+    .ci-contact-link{
+      display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;
+      color:var(--matcha-deep);padding:11px 16px;background:var(--leaf-bg);
+      border-radius:10px;border:1px solid var(--border);margin-bottom:8px;
+      transition:var(--transition);
+    }
+    .ci-contact-link:hover{background:var(--matcha);color:#fff;border-color:var(--matcha);transform:translateX(4px)}
+    .ci-contact-link svg{width:16px;height:16px;flex-shrink:0}
+    .ci-hours{font-size:12px;font-weight:300;color:var(--text-muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+    .ci-founder-row{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+    .ci-founder{background:var(--leaf-bg);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+    .ci-founder-name{font-weight:600;font-size:13px;color:var(--charcoal);margin-bottom:4px}
+    .ci-founder-role{font-size:11px;color:var(--text-muted);margin-bottom:8px;letter-spacing:0.06em}
+    .ci-founder-phone{font-size:13px;color:var(--matcha-deep);font-weight:500}
+
+    /* form side */
+    .contact-form-wrap{}
+    .form-tabs{display:flex;gap:0;background:var(--warm-white);border-radius:12px;padding:4px;margin-bottom:32px;border:1px solid var(--border)}
+    .form-tab{
+      flex:1;text-align:center;padding:12px;border-radius:9px;
+      font-family:var(--font-sans);font-size:13px;font-weight:500;
+      color:var(--text-muted);cursor:pointer;border:none;background:transparent;
+      transition:var(--transition);letter-spacing:0.04em;
+    }
+    .form-tab.active{background:#fff;color:var(--matcha-deep);box-shadow:0 2px 8px rgba(74,124,64,0.1)}
+    .form-panel{display:none}
+    .form-panel.active{display:block}
+    .form-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--charcoal);margin-bottom:6px}
+    .form-title em{font-style:italic;color:var(--matcha)}
+    .form-sub{font-size:14px;font-weight:300;color:var(--text-muted);margin-bottom:28px;line-height:1.7}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form-group{margin-bottom:16px}
+    .form-label{display:block;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:7px}
+    .form-input,.form-select,.form-textarea{
+      width:100%;background:#fff;
+      border:1.5px solid var(--border);border-radius:10px;
+      padding:12px 16px;font-family:var(--font-sans);font-size:14px;color:var(--text);
+      outline:none;transition:border-color 0.25s,box-shadow 0.25s;
+    }
+    .form-textarea{min-height:120px;resize:vertical;line-height:1.6}
+    .form-input:focus,.form-select:focus,.form-textarea:focus{
+      border-color:var(--matcha);box-shadow:0 0 0 4px rgba(74,124,64,0.08);
+    }
+    .form-input::placeholder,.form-textarea::placeholder{color:var(--text-muted);opacity:0.6}
+    .form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%237a7a6a' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:18px;padding-right:44px}
+    .form-checkbox-group{display:flex;flex-direction:column;gap:10px}
+    .form-checkbox{display:flex;align-items:flex-start;gap:10px;cursor:pointer}
+    .form-checkbox input{width:16px;height:16px;margin-top:2px;accent-color:var(--matcha);flex-shrink:0;cursor:pointer}
+    .form-checkbox-label{font-size:13px;font-weight:300;color:var(--text-muted);line-height:1.5}
+    .form-submit{
+      width:100%;padding:15px;margin-top:8px;
+      background:linear-gradient(135deg,var(--matcha),var(--matcha-deep));
+      color:#fff;border:none;border-radius:40px;
+      font-family:var(--font-sans);font-size:14px;font-weight:600;
+      letter-spacing:0.06em;cursor:pointer;
+      transition:var(--transition);box-shadow:0 4px 18px rgba(74,124,64,0.3);
+    }
+    .form-submit:hover{background:linear-gradient(135deg,var(--matcha-light),var(--matcha));box-shadow:0 6px 26px rgba(74,124,64,0.42);transform:translateY(-1px)}
+    .form-submit:active{transform:translateY(0)}
+    .form-note{font-size:12px;font-weight:300;color:var(--text-muted);text-align:center;margin-top:12px;line-height:1.6}
+    .form-success{
+      display:none;text-align:center;padding:48px 32px;
+      background:var(--leaf-bg);border:2px solid rgba(74,124,64,0.2);
+      border-radius:16px;margin-top:16px;
+    }
+    .form-success.show{display:block}
+    .form-success-icon{font-size:44px;margin-bottom:16px}
+    .form-success h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--matcha-deep);margin-bottom:10px}
+    .form-success p{font-size:14px;font-weight:300;color:var(--text-muted);line-height:1.75}
+
+    /* ── FAQ ── */
+    .faq-section{padding:100px 0;background:var(--warm-white);position:relative;z-index:1}
+    .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px}
+    .faq-item{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px 26px;transition:var(--transition);cursor:pointer}
+    .faq-item:hover{border-color:var(--matcha);box-shadow:var(--shadow-sm)}
+    .faq-q{font-weight:600;font-size:14px;color:var(--charcoal);margin-bottom:10px;display:flex;align-items:flex-start;gap:10px;line-height:1.45}
+    .faq-q::before{content:'Q';font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--matcha);flex-shrink:0;line-height:1.2}
+    .faq-a{font-size:13px;font-weight:300;color:var(--text-muted);line-height:1.75}
+
+    /* ── DIRECT CONTACT STRIP ── */
+    .direct-strip{
+      padding:80px 0;background:var(--charcoal);position:relative;z-index:1;text-align:center;
+    }
+    .direct-strip h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,46px);font-weight:300;color:#fff;margin-bottom:12px}
+    .direct-strip h2 em{font-style:italic;color:var(--matcha-pale)}
+    .direct-strip p{font-size:15px;font-weight:300;color:rgba(255,255,255,0.52);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.8}
+    .direct-cards{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+    .direct-card{
+      display:flex;align-items:center;gap:14px;
+      background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+      border-radius:16px;padding:18px 24px;
+      transition:var(--transition);
+    }
+    .direct-card:hover{background:rgba(255,255,255,0.13);transform:translateY(-3px);border-color:rgba(74,124,64,0.4)}
+    .dc-icon{font-size:24px;flex-shrink:0}
+    .dc-label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px}
+    .dc-value{font-size:15px;font-weight:500;color:#fff}
+
+    @media(max-width:900px){
+      .contact-layout{grid-template-columns:1fr}
+      .contact-info{position:static}
+      .faq-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){
+      .form-row{grid-template-columns:1fr}
+      .direct-cards{flex-direction:column;max-width:320px;margin:0 auto}
+      .contact-quick{flex-direction:column;align-items:center}
+    }
+  </style>
+</head>
+<body>
+<div class="petal-field" id="petalField" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav class="nav scrolled" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><svg class="logo-leaf" viewBox="0 0 28 32" fill="none"><path d="M14 2C14 2 3 8 3 19C3 25.627 7.925 31 14 31C20.075 31 25 25.627 25 19C25 8 14 2 14 2Z" fill="url(#lg1)"/><path d="M14 31V10" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/><defs><linearGradient id="lg1" x1="14" y1="2" x2="14" y2="31"><stop offset="0%" stop-color="#6daa3a"/><stop offset="100%" stop-color="#3d7a28"/></linearGradient></defs></svg><span class="logo-text">sp<span class="logo-o">◉</span>rk <span class="logo-sub">leaf</span></span></a>
+    <ul class="nav-links" id="navLinks"><li><a href="index.html" class="nav-link">Home</a></li><li><a href="market.html" class="nav-link">Market</a></li><li><a href="products.html" class="nav-link">Products</a></li><li><a href="partnership.html" class="nav-link">Partnership</a></li><li><a href="about.html" class="nav-link">About</a></li><li><a href="contact.html" class="nav-link active">Contact</a></li></ul>
+    <div class="nav-actions"><a href="contact.html" class="btn btn-sm nav-cta">Get in Touch</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-label ph-label reveal-up" style="justify-content:center">Start the Conversation</div>
+    <h1 class="section-title ph-title reveal-up" style="text-align:center">Let's build something<br><em>together.</em></h1>
+    <p class="ph-sub reveal-up">Whether you're a potential distributor, an investor doing due diligence, or someone who simply wants to learn more — we're here and ready to talk.</p>
+    <div class="contact-quick reveal-up">
+      <a href="tel:5512161346" class="cq-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Call 551-216-1346</a>
+      <a href="mailto:sparkleafco@gmail.com" class="cq-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>sparkleafco@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT BODY -->
+<section class="contact-body">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- LEFT INFO -->
+      <div class="contact-info">
+        <div class="ci-card reveal-left">
+          <div class="ci-card-icon">📞</div>
+          <div class="ci-card-title">Call or Text Directly</div>
+          <div class="ci-card-desc">Our founders are directly reachable. No gatekeepers — just real conversations with the people building Spark Leaf.</div>
+          <a href="tel:5512161346" class="ci-contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>551-216-1346 (Main Line)</a>
+          <a href="mailto:sparkleafco@gmail.com" class="ci-contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>sparkleafco@gmail.com</a>
+          <div class="ci-hours">Typical response time: within 24 hours · Available Mon–Sat</div>
+        </div>
+        <div class="ci-card reveal-left" style="transition-delay:0.1s">
+          <div class="ci-card-icon">👥</div>
+          <div class="ci-card-title">Reach the Founders</div>
+          <div class="ci-card-desc">You'll always be speaking with someone who has full context and decision-making authority.</div>
+          <div class="ci-founder-row">
+            <div class="ci-founder">
+              <div class="ci-founder-name">Prince Ahmed</div>
+              <div class="ci-founder-role">Co-Founder · Brand & Strategy</div>
+              <div class="ci-founder-phone"><a href="tel:5513128391" style="color:var(--matcha-deep)">(551) 312-8391</a></div>
+            </div>
+            <div class="ci-founder">
+              <div class="ci-founder-name">Sameh Ahmad</div>
+              <div class="ci-founder-role">Co-Founder · Operations & Distribution</div>
+              <div class="ci-founder-phone"><a href="tel:5512161346" style="color:var(--matcha-deep)">(551) 216-1346</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="ci-card reveal-left" style="transition-delay:0.2s">
+          <div class="ci-card-icon">📄</div>
+          <div class="ci-card-title">Need More Information?</div>
+          <div class="ci-card-desc">Explore the full market data and product details before reaching out — or request our full R&D white paper directly via email.</div>
+          <a href="market.html" class="ci-contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Market Opportunity Page</a>
+          <a href="products.html" class="ci-contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Full Product Details</a>
+        </div>
+      </div>
+
+      <!-- RIGHT FORM -->
+      <div class="contact-form-wrap reveal-right">
+        <div class="form-tabs">
+          <button class="form-tab active" data-tab="distributor">🚚 Distribution Inquiry</button>
+          <button class="form-tab" data-tab="investor">📈 Investor Inquiry</button>
+          <button class="form-tab" data-tab="general">💬 General Question</button>
+        </div>
+
+        <!-- DISTRIBUTOR FORM -->
+        <div class="form-panel active" id="panel-distributor">
+          <div class="form-title">Distribution <em>Inquiry</em></div>
+          <p class="form-sub">Tell us about your distribution network and we'll get back to you with relevant partnership details within 24 hours.</p>
+          <form id="distForm" onsubmit="handleSubmit(event,'distSuccess')">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">First Name *</label><input type="text" class="form-input" placeholder="First name" required/></div>
+              <div class="form-group"><label class="form-label">Last Name *</label><input type="text" class="form-input" placeholder="Last name" required/></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Company Name *</label><input type="text" class="form-input" placeholder="Your company" required/></div>
+              <div class="form-group"><label class="form-label">Phone Number *</label><input type="tel" class="form-input" placeholder="(555) 000-0000" required/></div>
+            </div>
+            <div class="form-group"><label class="form-label">Email Address *</label><input type="email" class="form-input" placeholder="your@company.com" required/></div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Distribution Region</label><select class="form-select"><option value="">Select region…</option><option>Northeast U.S.</option><option>Southeast U.S.</option><option>Midwest U.S.</option><option>Southwest U.S.</option><option>West Coast / Pacific</option><option>Multiple Regions</option><option>National</option><option>Other / International</option></select></div>
+              <div class="form-group"><label class="form-label">Distribution Channel</label><select class="form-select"><option value="">Select channel…</option><option>Grocery / Supermarket</option><option>Specialty Retail / Health Food</option><option>Convenience Store</option><option>Gym / Fitness Facilities</option><option>Foodservice / Restaurant</option><option>Online / E-Commerce</option><option>Multiple Channels</option></select></div>
+            </div>
+            <div class="form-group"><label class="form-label">Monthly Volume Capacity (cases)</label><select class="form-select"><option value="">Select range…</option><option>Under 100 cases/month</option><option>100 – 500 cases/month</option><option>500 – 2,000 cases/month</option><option>2,000 – 10,000 cases/month</option><option>10,000+ cases/month</option><option>Not sure yet</option></select></div>
+            <div class="form-group"><label class="form-label">Tell us about your current distribution portfolio</label><textarea class="form-textarea" placeholder="What brands do you currently carry? How many accounts? What's your geographic reach?"></textarea></div>
+            <div class="form-group">
+              <label class="form-label">What interests you most about Spark Leaf?</label>
+              <div class="form-checkbox-group">
+                <label class="form-checkbox"><input type="checkbox"/><span class="form-checkbox-label">First-mover advantage in the U.S. matcha energy category</span></label>
+                <label class="form-checkbox"><input type="checkbox"/><span class="form-checkbox-label">Premium pricing and margin potential</span></label>
+                <label class="form-checkbox"><input type="checkbox"/><span class="form-checkbox-label">Strong appeal to Millennial and Gen Z consumers</span></label>
+                <label class="form-checkbox"><input type="checkbox"/><span class="form-checkbox-label">Clean label and functional benefits</span></label>
+                <label class="form-checkbox"><input type="checkbox"/><span class="form-checkbox-label">Long-term growth trajectory</span></label>
+              </div>
+            </div>
+            <button type="submit" class="form-submit">Submit Distribution Inquiry →</button>
+            <p class="form-note">We typically respond within 24 hours. Your information is kept confidential and used only for partnership discussions.</p>
+          </form>
+          <div class="form-success" id="distSuccess">
+            <div class="form-success-icon">🍵</div>
+            <h3>Inquiry Received!</h3>
+            <p>Thank you for your interest in distributing Spark Leaf. One of our founders will reach out within 24 hours to schedule a discovery call.<br><br>In the meantime, feel free to call us directly at <strong>551-216-1346</strong> or email <strong>sparkleafco@gmail.com</strong>.</p>
+          </div>
+        </div>
+
+        <!-- INVESTOR FORM -->
+        <div class="form-panel" id="panel-investor">
+          <div class="form-title">Investor <em>Inquiry</em></div>
+          <p class="form-sub">We welcome conversations with investors who are excited about the functional beverage market. Fill in your details and we'll respond within 24 hours.</p>
+          <form id="invForm" onsubmit="handleSubmit(event,'invSuccess')">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">First Name *</label><input type="text" class="form-input" placeholder="First name" required/></div>
+              <div class="form-group"><label class="form-label">Last Name *</label><input type="text" class="form-input" placeholder="Last name" required/></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Organization / Fund</label><input type="text" class="form-input" placeholder="Firm or individual"/></div>
+              <div class="form-group"><label class="form-label">Phone Number *</label><input type="tel" class="form-input" placeholder="(555) 000-0000" required/></div>
+            </div>
+            <div class="form-group"><label class="form-label">Email Address *</label><input type="email" class="form-input" placeholder="your@email.com" required/></div>
+            <div class="form-group"><label class="form-label">Investor Type</label><select class="form-select"><option value="">Select…</option><option>Angel Investor</option><option>Venture Capital Fund</option><option>Family Office</option><option>Private Equity</option><option>Strategic / Corporate Investor</option><option>Individual Investor</option><option>Other</option></select></div>
+            <div class="form-group"><label class="form-label">Investment Range (if applicable)</label><select class="form-select"><option value="">Prefer not to say / Discuss in call</option><option>Under $50K</option><option>$50K – $250K</option><option>$250K – $1M</option><option>$1M – $5M</option><option>$5M+</option></select></div>
+            <div class="form-group"><label class="form-label">What drew you to Spark Leaf?</label><textarea class="form-textarea" placeholder="Tell us what excites you about this opportunity — the market, the product, the team, or something else entirely."></textarea></div>
+            <div class="form-group"><label class="form-label">What information would be most helpful?</label>
+              <div class="form-checkbox-group">
+                <label class="form-checkbox"><input type="checkbox"/><span class="form-checkbox-label">Full market research and R&D white paper</span></label>
+                <label class="form-checkbox"><input type="checkbox"/><span class="form-checkbox-label">Current business stage and traction</span></label>
+                <label class="form-checkbox"><input type="checkbox"/><span class="form-checkbox-label">Comparable case studies (Perfect Ted, category comps)</span></label>
+                <label class="form-checkbox"><input type="checkbox"/><span class="form-checkbox-label">Go-to-market and distribution strategy</span></label>
+                <label class="form-checkbox"><input type="checkbox"/><span class="form-checkbox-label">Early-stage valuation conversation</span></label>
+              </div>
+            </div>
+            <button type="submit" class="form-submit">Submit Investor Inquiry →</button>
+            <p class="form-note">All information shared is confidential. We'll respond within 24 hours to schedule a call with our founders directly.</p>
+          </form>
+          <div class="form-success" id="invSuccess">
+            <div class="form-success-icon">📈</div>
+            <h3>Inquiry Received!</h3>
+            <p>Thank you for your interest in Spark Leaf. Our founders Prince Ahmed and Sameh Ahmad will reach out within 24 hours.<br><br>Direct contact: <strong>551-216-1346</strong> · <strong>sparkleafco@gmail.com</strong></p>
+          </div>
+        </div>
+
+        <!-- GENERAL FORM -->
+        <div class="form-panel" id="panel-general">
+          <div class="form-title">General <em>Inquiry</em></div>
+          <p class="form-sub">Have a question that doesn't fit neatly into the other categories? Send it here — we read and respond to every message.</p>
+          <form id="genForm" onsubmit="handleSubmit(event,'genSuccess')">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Your Name *</label><input type="text" class="form-input" placeholder="Full name" required/></div>
+              <div class="form-group"><label class="form-label">Email Address *</label><input type="email" class="form-input" placeholder="your@email.com" required/></div>
+            </div>
+            <div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" placeholder="What's this about?"/></div>
+            <div class="form-group"><label class="form-label">Your Message *</label><textarea class="form-textarea" style="min-height:160px" placeholder="Write your message here…" required></textarea></div>
+            <button type="submit" class="form-submit">Send Message →</button>
+            <p class="form-note">We respond to every message within 24 hours.</p>
+          </form>
+          <div class="form-success" id="genSuccess">
+            <div class="form-success-icon">✉️</div>
+            <h3>Message Sent!</h3>
+            <p>We'll get back to you within 24 hours. For urgent matters, call us directly at <strong>551-216-1346</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-label reveal-up">Common Questions</div>
+    <h2 class="section-title reveal-up">Frequently asked by<br><em>partners and investors.</em></h2>
+    <div class="faq-grid">
+      <div class="faq-item reveal-up" data-delay="0"><div class="faq-q">What stage is Spark Leaf currently at?</div><div class="faq-a">Spark Leaf is in its early launch phase — product is developed, branding is complete, and we are actively establishing our first distribution partnerships and investor relationships in the U.S. market. This is the optimal time to move.</div></div>
+      <div class="faq-item reveal-up" data-delay="80"><div class="faq-q">Are there exclusivity options for distributors?</div><div class="faq-a">Yes. Early distributors have the opportunity to discuss territorial or channel exclusivity. These terms are negotiated directly with our founders based on distribution network size, geographic reach, and volume capacity. Reach out to discuss specifics.</div></div>
+      <div class="faq-item reveal-up" data-delay="0"><div class="faq-q">How does Spark Leaf compare to Red Bull or Monster?</div><div class="faq-a">Spark Leaf doesn't compete in the same space. We're a premium, clean-label functional beverage targeting wellness-focused consumers who have outgrown conventional energy drinks. The product is premium-priced, lower-sugar, and positioned for a growing demographic that mainstream brands aren't serving well.</div></div>
+      <div class="faq-item reveal-up" data-delay="80"><div class="faq-q">What's the minimum order quantity?</div><div class="faq-a">Minimum order quantities and wholesale pricing are discussed directly based on your distribution capacity and geography. We work with partners of varying scale — from regional specialty distributors to larger national networks. Contact us to discuss what works for your operation.</div></div>
+      <div class="faq-item reveal-up" data-delay="0"><div class="faq-q">Is there R&D documentation available?</div><div class="faq-a">Yes. We have a full market analysis white paper covering the energy drink and matcha markets, competitive landscape, target demographics, and the product's value proposition. This is available to qualified distribution and investment partners upon request via email.</div></div>
+      <div class="faq-item reveal-up" data-delay="80"><div class="faq-q">Why should I act now vs. waiting?</div><div class="faq-a">The U.S. market has no dominant matcha energy brand — yet. The category has been proven in Europe (Perfect Ted: $175M valuation in 3 years). The longer you wait, the more crowded the niche becomes and the harder premium shelf positioning becomes to negotiate. Early partners gain the advantages that late entrants have to buy.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECT CONTACT STRIP -->
+<section class="direct-strip">
+  <div class="container">
+    <h2 class="reveal-up">Prefer to reach us <em>directly?</em></h2>
+    <p class="reveal-up">No forms required. Our founders respond personally to all calls and emails regarding distribution or investment partnerships.</p>
+    <div class="direct-cards reveal-up">
+      <a href="tel:5512161346" class="direct-card"><div class="dc-icon">📞</div><div><div class="dc-label">Main Line</div><div class="dc-value">551-216-1346</div></div></a>
+      <a href="tel:5513128391" class="direct-card"><div class="dc-icon">📱</div><div><div class="dc-label">Prince Ahmed (Co-Founder)</div><div class="dc-value">(551) 312-8391</div></div></a>
+      <a href="mailto:sparkleafco@gmail.com" class="direct-card"><div class="dc-icon">📧</div><div><div class="dc-label">Email</div><div class="dc-value">sparkleafco@gmail.com</div></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="logo"><svg class="logo-leaf" viewBox="0 0 28 32" fill="none"><path d="M14 2C14 2 3 8 3 19C3 25.627 7.925 31 14 31C20.075 31 25 25.627 25 19C25 8 14 2 14 2Z" fill="url(#lgf)"/><path d="M14 31V10" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/><defs><linearGradient id="lgf" x1="14" y1="2" x2="14" y2="31"><stop offset="0%" stop-color="#6daa3a"/><stop offset="100%" stop-color="#3d7a28"/></linearGradient></defs></svg><span class="logo-text">sp<span class="logo-o">◉</span>rk <span class="logo-sub">leaf</span></span></a><p class="footer-tagline">America's first premium matcha energy drink.</p><div class="footer-contact-block"><a href="tel:5512161346" class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>551-216-1346</a><a href="mailto:sparkleafco@gmail.com" class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>sparkleafco@gmail.com</a></div></div><div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="market.html">Market</a></li><li><a href="products.html">Products</a></li><li><a href="partnership.html">Partnership</a></li></ul></div><div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="about.html">Founders</a></li><li><a href="about.html">The Science</a></li></ul></div><div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="contact.html">Partner Inquiry</a></li><li><a href="contact.html">Investor Inquiry</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 Spark Leaf Co., Inc. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div></div></div></footer>
+
+<!-- AI CHAT -->
+<div class="chat-launcher" id="chatLauncher"><div class="chat-bubble-hint" id="chatHint">Need help? Ask our AI →</div><button class="chat-toggle-btn" aria-label="Open chat"><div class="chat-pulse"></div><svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+<div class="chat-window" id="chatWindow"><div class="chat-header"><div class="chat-avatar">🍵</div><div class="chat-header-info"><div class="chat-header-name">Spark Leaf Assistant</div><div class="chat-header-status"><div class="status-dot"></div>Online · Ready to help</div></div></div><div class="chat-messages" id="chatMessages"></div><div class="chat-quick-btns"><button class="chat-quick-btn" data-msg="What is the phone number and email for Spark Leaf?">📞 Contact info</button><button class="chat-quick-btn" data-msg="How do I become a distributor?">🚚 Distribute</button><button class="chat-quick-btn" data-msg="What investment opportunities exist?">💼 Invest</button><button class="chat-quick-btn" data-msg="What is the minimum order quantity?">📦 MOQ</button></div><div class="chat-input-row"><input type="text" class="chat-input" id="chatInput" placeholder="Ask us anything…"/><button class="chat-send-btn" id="chatSend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><div class="chat-powered">Powered by Spark Leaf AI · sparkleafco@gmail.com</div></div>
+
+<script src="shared.js"></script>
+<script>
+  // Form tabs
+  document.querySelectorAll('.form-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.form-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Form submission handler
+  function handleSubmit(e, successId) {
+    e.preventDefault();
+    const form = e.target;
+    form.style.display = 'none';
+    document.getElementById(successId).classList.add('show');
+    window.scrollTo({ top: document.getElementById(successId).getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
